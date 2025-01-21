@@ -19,5 +19,3 @@ Concpets covered in this project are :
 - Role of authentication in web applications
 
 
-# step 1
-    Add the login page to the project.
