@@ -16,4 +16,8 @@ Concpets covered in this project are :
 - Overview of the MERN stack 
 - REST API Structure and Endpoints 
 - Basics of database schema design 
-- Role of authentication in web applications
+- Role of authentication in web applications
+
+
+# step 1
+    Add the login page to the project.
