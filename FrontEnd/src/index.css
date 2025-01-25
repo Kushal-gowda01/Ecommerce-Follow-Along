@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+:root{
+    background-image: url(assets/bg3.jpg);
+    background-size: cover;
+    height: 100vh;
+    min-width: 100vw; 
+}
