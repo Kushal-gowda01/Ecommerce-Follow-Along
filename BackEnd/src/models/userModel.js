@@ -1,67 +1,73 @@
-const {model , schema} = require('mongoose');
+const { model, Schema } = require("mongoose");
 
-const userSchema = new schema({
-    name:{
+const userSchema = new Schema({
+    name: {
         type: String,
         required: [true, "Please enter your name!"],
-      },
-      email:{
+    },
+    email: {
         type: String,
         required: [true, "Please enter your email!"],
-      },
-      password:{
+        unique: true,
+        match: [
+            /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
+            "Please enter a valid email address!",
+        ],
+    },
+    password: {
         type: String,
         required: [true, "Please enter your password"],
-        minLength: [4, "Password should be greater than 4 characters"],
+        minlength: [4, "Password should be greater than 4 characters"],
         select: false,
-      },
-      phoneNumber:{
-        type: Number,
-      },
-      addresses:[
+    },
+    phoneNumber: {
+        type: String, 
+    },
+    addresses: [
         {
-          country: {
-            type: String,
-          },
-          city:{
-            type: String,
-          },
-          address1:{
-            type: String,
-          },
-          address2:{
-            type: String,
-          },
-          zipCode:{
-            type: Number,
-          },
-          addressType:{
-            type: String,
-          },
-        }
-      ],
-      role:{
+            country: {
+                type: String,
+            },
+            city: {
+                type: String,
+            },
+            address1: {
+                type: String,
+            },
+            address2: {
+                type: String,
+            },
+            zipCode: {
+                type: String,
+            },
+            addressType: {
+                type: String,
+                enum: ["Home", "Work", "Other"],
+            },
+        },
+    ],
+    role: {
         type: String,
+        enum: ["user", "admin"], 
         default: "user",
-      },
-      avatar:{
+    },
+    avatar: {
         public_id: {
-          type: String,
-          required: true,
+            type: String,
+            required: true,
         },
         url: {
-          type: String,
-          required: true,
+            type: String,
+            required: true,
         },
-     },
-     createdAt:{
-      type: Date,
-      default: Date.now(),
-     },
-     resetPasswordToken: String,
-     resetPasswordTime: Date,
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
+    resetPasswordToken: String,
+    resetPasswordTime: Date,
 });
 
-const User = model('User', userSchema);
-
-module.exports = userModel;
+const User = model("User", userSchema);
+module.exports = User;

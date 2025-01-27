@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./login.css";
 import logo from '../assets/user.png';
 
+
+
 export default function Example() {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -67,7 +69,7 @@ export default function Example() {
           </div>
 
           <div className="signup-link">
-            Don't have an account? <a href="#">Sign up</a>
+            Don't have an account? <a href="/signup">Sign up</a>
           </div>
         </form>
       </div>
