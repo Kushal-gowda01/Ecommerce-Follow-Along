@@ -1,73 +1,68 @@
-const { model, Schema } = require("mongoose");
+const mongoose = require('mongoose'); 
 
-const userSchema = new Schema({
-    name: {
+const userSchema = new mongoose.Schema({
+    name:{
         type: String,
         required: [true, "Please enter your name!"],
-    },
-    email: {
+      },
+      email:{
         type: String,
         required: [true, "Please enter your email!"],
-        unique: true,
-        match: [
-            /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
-            "Please enter a valid email address!",
-        ],
-    },
-    password: {
+      },
+      password:{
         type: String,
         required: [true, "Please enter your password"],
-        minlength: [4, "Password should be greater than 4 characters"],
-        select: false,
-    },
-    phoneNumber: {
-        type: String, 
-    },
-    addresses: [
+        minLength: [4, "Password should be greater than 4 characters"]
+        
+      },
+      phoneNumber:{
+        type: Number,
+      },
+      addresses:[
         {
-            country: {
-                type: String,
-            },
-            city: {
-                type: String,
-            },
-            address1: {
-                type: String,
-            },
-            address2: {
-                type: String,
-            },
-            zipCode: {
-                type: String,
-            },
-            addressType: {
-                type: String,
-                enum: ["Home", "Work", "Other"],
-            },
-        },
-    ],
-    role: {
-        type: String,
-        enum: ["user", "admin"], 
-        default: "user",
-    },
-    avatar: {
-        public_id: {
+          country: {
             type: String,
-            required: true,
+          },
+          city:{
+            type: String,
+          },
+          address1:{
+            type: String,
+          },
+          address2:{
+            type: String,
+          },
+          zipCode:{
+            type: Number,
+          },
+          addressType:{
+            type: String,
+          },
+        }
+      ],
+      role:{
+        type: String,
+        default: "user",
+      },
+      avatar:{
+        public_id: {
+          type: String,
+          required: true,
         },
         url: {
-            type: String,
-            required: true,
+          type: String,
+          required: true,
         },
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now,
-    },
-    resetPasswordToken: String,
-    resetPasswordTime: Date,
+     },
+     createdAt:{
+      type: Date,
+      default: Date.now(),
+     },
+     resetPasswordToken: String,
+     resetPasswordTime: Date,
+
 });
 
-const User = model("User", userSchema);
-module.exports = User;
+const userModel= mongoose.model('User',userSchema);
+
+module.exports = userModel;

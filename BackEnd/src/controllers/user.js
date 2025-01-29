@@ -1,49 +1,69 @@
-const { Router } = require("express");
+const {Router}= require("express");
 const userModel = require("../models/userModel");
-const { upload } = require("../../multer");
+const {upload} = require("../../multer");
+const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const path = require("path");
-const ErrorHandler = require("../utils/ErrorHandler"); 
+const { ErrorHandler } = require("../utils/ErrorHandler");
 
-const router = Router();
-
-router.post("/create-user", upload.single("file"), async (req, res, next) => {
-    try {
-        const { name, email, password } = req.body;
-
-        const userEmail = await userModel.findOne({ email });
-        if (userEmail) {
-            return next(new ErrorHandler("User already exists", 400));
-        }
-
-        if (!req.file) {
-            return next(new ErrorHandler("No file uploaded", 400));
-        }
-
-        const filename = req.file.filename;
-        const fileUrl = path.join("uploads", filename); 
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        const user = await userModel.create({
-            name,
-            email,
-            password: hashedPassword,
-            avatar: fileUrl,
-        });
-
-        res.status(201).json({
-            success: true,
-            message: "User created successfully",
-            user: {
-                id: user._id,
-                name: user.name,
-                email: user.email,
-                avatar: user.avatar,
-            },
-        });
-    } catch (error) {
-        next(error); 
+require("dotenv").config(
+    {
+        path: "../config/.env"
     }
+);
+
+const secret = process.env.secret;
+
+const userRouter = Router();
+
+
+userRouter.post("/create-user",upload.single("file"), async(req,res,next)=>{
+    const {name, email, password} = req.body;
+    const userEmail = await userModel.findOne({email:email});
+    if (userEmail) {
+        return res.status(400).json({error: "User already exists"});
+      }
+      const filename = req.file.filename ;
+      const fileUrl = path.join(filename);
+    await bcrypt.hash(password, 10, async (err, hash)=>{
+        await userModel.create({
+                name:name,
+                email:email,
+                password:hash,
+                avatar: fileUrl,
+            
+        })
+        console.log(hash);
+        return res.status(200).json({message: "User created"});
+    })
+    
+
+
 });
 
-module.exports = router;
+userRouter.post("/login", async(req,res)=>{
+    const {email, password} = req.body;
+    const user = await userModel.findOne({email:email});
+    if(!user){
+        return next(new ErrorHandler("User not found", 400));
+    }
+    bcrypt.compare(password, user.password, (err, result)=>{
+        if (err){
+            return res.status(400).json({error: "comparing error"});
+        }
+        if(!result){
+            return res.status(400).json({error: "Invalid credentials"});
+        }
+        else{
+            
+            jwt.sign({email:email}, "secretkey", (err, token)=>{
+                if(err){
+                    return res.status(400).json({error: "invalid jwt"});
+                }
+                return res.status(200).json({ token: token});
+            });
+            return res.status(200).json({message: "User logged in"});
+        };
+    });
+});
+
+module.exports = userRouter;
