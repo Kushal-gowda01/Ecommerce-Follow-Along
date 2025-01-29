@@ -1,6 +1,6 @@
-const {model , schema} = require('mongoose');
+const mongoose = require('mongoose'); 
 
-const userSchema = new schema({
+const userSchema = new mongoose.Schema({
     name:{
         type: String,
         required: [true, "Please enter your name!"],
@@ -12,8 +12,8 @@ const userSchema = new schema({
       password:{
         type: String,
         required: [true, "Please enter your password"],
-        minLength: [4, "Password should be greater than 4 characters"],
-        select: false,
+        minLength: [4, "Password should be greater than 4 characters"]
+        
       },
       phoneNumber:{
         type: Number,
@@ -60,8 +60,9 @@ const userSchema = new schema({
      },
      resetPasswordToken: String,
      resetPasswordTime: Date,
+
 });
 
-const User = model('User', userSchema);
+const userModel= mongoose.model('User',userSchema);
 
 module.exports = userModel;
