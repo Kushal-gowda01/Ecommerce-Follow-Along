@@ -142,24 +142,33 @@ export default function Example() {
             <label htmlFor="avatar" className="block text-sm font-medium leading-6 text-white">
             </label>
             <div className="mt-2 flex items-center">
-              <span className="inline-block h-8 w-8 rounded-full overflow-hidden">
+            <span className="avatar-upload">
                 {avatar ? (
-                  <img src={URL.createObjectURL(avatar)} alt="avatar" className="h-full w-full object-cover rounded-full" />
+                <img
+                    src={URL.createObjectURL(avatar)}
+                    alt="avatar"
+                    className="h-full w-full object-cover rounded-full"
+                />
                 ) : (
-                  <RxAvatar className="h-8 w-8" />
+                <RxAvatar className="h-full w-full" />
                 )}
-              </span>
-              <label htmlFor="file-input" className="ml-5 flex items-center px-4 py-2 border border-gray-300 rounded-md text-sm text-gray-700 bg-white">
-                Upload a file
-              </label>
-              <input
+                
+            </span>
+            <h4>Upload a file</h4>
+            <label
+                htmlFor="file-input"
+                className="ml-5 flex items-center px-4 py-2 border border-gray-300 rounded-md text-sm text-gray-700 bg-white"
+            >
+                
+            </label>
+            <input
                 type="file"
                 name="avatar"
                 id="file-input"
                 accept=".jpg,.jpeg,.png"
                 className="sr-only"
                 onChange={(e) => setAvatar(e.target.files[0])}
-              />
+            />
             </div>
           </div>
 
