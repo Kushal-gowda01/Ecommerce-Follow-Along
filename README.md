@@ -21,3 +21,5 @@ Concpets covered in this project are :
 
 # step 1
     Add the login page to the project.
+# step 2.
+    Add the signup page and form validation.
