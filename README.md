@@ -137,3 +137,11 @@ Design the Homepage Layout.
 Set up a responsive grid layout to display multiple product cards neatly.
 Ensured the layout adapts to different screen sizes for a better user experience.
 done
+
+## Milestone 9:-
+Created the form for products
+This form will take multiple product images images as input
+
+## Milestone 10:-
+Builded a POST endpoint to receives product data.
+Validated and saved the product details to MongoDB.
