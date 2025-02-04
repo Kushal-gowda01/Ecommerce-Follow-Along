@@ -1,15 +1,13 @@
 import React from "react";
-import "./product.css";
+import "../component/product.css"
 
-export const Product = ({ image, name, price, description }) => {
-  return (
-    <div className="product-card">
-      <img src={image} alt="product" className="product-image" />
-      <div className="product-info">
-        <h1 className="product-name">{name}</h1>
-        <p className="product-price">{price}</p>
-        <p className="product-description">{description}</p>
-      </div>
-    </div>
-  );
-};
+export const Product  = ({image,name,price,description})=>{
+    return(
+        <div className="bg-white rounded-lg shadow-lg p-4">
+            <img src={image} alt="product" className="w-full h-40 object-cover"/>
+            <h1 className="text-lg font-bold text-neutral-900">{name}</h1>
+            <p className="text-neutral-500">{price}</p>
+            <p className="text-neutral-700">{description}</p>
+        </div>
+    )
+}

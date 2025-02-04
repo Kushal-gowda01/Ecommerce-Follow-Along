@@ -16,6 +16,8 @@
     padding: 16px;
     width: 250px; 
     text-align: center;
+    display: flex;
+    gap: 50px;
   }
   
 

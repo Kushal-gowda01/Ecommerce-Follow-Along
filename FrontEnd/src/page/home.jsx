@@ -1,6 +1,5 @@
 import React from "react";
-import {Product} from '../component/Product'
-
+import { Product } from "../component/Product";
 
 const productdetails = [
     {
@@ -24,8 +23,12 @@ const productdetails = [
 ]
 export const Home =()=>{
     return(
-        <div className="w-full min-h-screeen bg-neutral-800 ">
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <>
+        <div className="p-4 display flex justify-center items-center">
+        <h1 className="text-4xl font-bold text-indigo-900">Welcome to our Store</h1>
+        </div>
+        <div className="w-full min-h-screeen p-4 display flex justify-center items-center mt-20">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
             {productdetails.map((product,index)=>{
                 return(
                     <>
@@ -36,5 +39,6 @@ export const Home =()=>{
             )}
         </div>
         </div>
+        </>
     )
 }
