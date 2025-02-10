@@ -145,3 +145,10 @@ This form will take multiple product images images as input
 ## Milestone 10:-
 Builded a POST endpoint to receives product data.
 Validated and saved the product details to MongoDB.
+
+## Milestone 11:-
+Fetch & Display Products
+Created an API endpoint to fetch all products from the database.
+Implemented a frontend function to fetch and display product data dynamically.
+Used useState and useEffect to manage the data lifecycle.
+
