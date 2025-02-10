@@ -1,34 +1,49 @@
-const {Router} = require('express');
-const {poductupload} = require('');
-const productrouter= Router();
+const {Router} = require('express')
+const productModel = require('./../Model/productModel')
+const {productUpload} = require('./../../multer')
 
-productrouter.get("/",(req ,res)=>{
-    res.send("Product router");
+const productRouter=Router();
+
+productRouter.get('/get-products',async (req,res)=>{
+    try{
+        const products = await productModel.find({})
+        if (!products){
+            return res.status(400).json({message:"No products foud"})
+        }
+        console.log(products)
+        return res.status(200).json({products:products})
+    }catch(err){
+        console.log(err)
+    }
 })
 
-productrouter.post("/upload",poductupload.single('product_image'), async (req, res) => {
-    const{name, description,catagory,tags,price,stock,email}=req.body;
-    try {
-        const seller = await productModel,findOne({email: email});
-        if (!seller) {
-            return res.status(404).json({message: 'Seller not found'});
+productRouter.post('/post-product',productUpload.array('files'),async (req,res)=>{
+    const {name,email,description,category,stock,tags,price} = req.body;
+    const images=req.files.map(file=>file.path);
+    try{
+        const seller = await productModel.findOne({email:email});
+        if (!seller){
+            return res.status(400).json({message:"Seller not found"})
         }
-        
-        if(Image,length == 0) {
-            return res.status(400).json({message: 'Image is required'});
+        if (images.length===0){
+            return res.status(400).json({message:"Please upload atleast one images"})
         }
-        const newproduct = await productModel.create({
-            name: name,
-            description: description,
-            catagory: catagory,
-            tags: tags,
-            price: price,
-            stock: stock,
-            image: image,
+        const newProduct = await productModel.create({
+            name:name,
+            description:description,
+            category:category,
+            tags:tags,
+            price:price,
+            stock:stock,
+            email:email,
+            images:images
         })
-        res.status(201).json({message: 'Product created successfully',product : newproduct});
-        }
-        catch(error){
-            console.log(error);
-        }
-    })
+
+        res.status(200).json({message:"Product created successfully",product:newProduct})
+    }catch(err){
+        console.log(err)
+    }
+
+})
+
+module.exports=productRouter;
