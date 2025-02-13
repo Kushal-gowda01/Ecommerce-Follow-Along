@@ -2,25 +2,40 @@ import React,{useEffect,useState} from 'react';
 import "../component/product.css"
 import PropTypes from 'prop-types';
 
-export const Product  = ({image,name,price,description})=>{
+export const Product  = ({ _id, name, images, description, price })=>{
 
-    useEffect(()=>{
-        document.body.style.backgroundColor='azure'
-      })
-    
-      
-    const [imgIndex,setImgIndex] = useState(0);
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const navigate = useNavigate();
 
     useEffect(() => {
+        if (!images || images.length === 0) return;
         const interval = setInterval(() => {
-            setImgIndex((prev) => {
-                console.log(prev + 1);
-                return (prev + 1)%(product.image.length-1) ;
-            });
+            setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
         }, 2000);
-    
-        return () => clearInterval(interval); 
-    }, [imgIndex]);
+        return () => clearInterval(interval);
+    }, [images]);
+
+    const currentImage = images && images.length > 0 ? images[currentIndex] : null;
+
+    const handleEdit = () => {
+        navigate(`/create-product/${_id}`);
+    };
+
+    const handleDelete = async () => {
+        try {
+            const response = await axios.delete(
+                `http://localhost:8000/api/v2/product/delete-product/${_id}`
+            );
+            if (response.status === 200) {
+                alert("Product deleted successfully!");
+                // Reload the page or fetch products again
+                window.location.reload();
+            }
+        } catch (err) {
+            console.error("Error deleting product:", err);
+            alert("Failed to delete product.");
+        }
+    };
 
     return(
         <div className="bg-white rounded-lg shadow-lg p-4">
