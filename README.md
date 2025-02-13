@@ -159,3 +159,11 @@ Fetch & Display Filtered Products
 Created an API endpoint to fetch products based on the user's email.
 Implemented frontend logic to request and display filtered products.
 Ensured efficient state management using React hooks.
+
+## Milestone 13:- 
+Edit Product Functionality
+Created a PUT API endpoint to update product details in MongoDB.
+Added an Edit button on the product card.
+Implemented auto-filled form for editing existing product details.
+Connected frontend with backend to send PUT requests.
+Handled errors and ensured data validation.

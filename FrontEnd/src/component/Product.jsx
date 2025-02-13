@@ -19,7 +19,7 @@ export const Product  = ({image,name,price,description})=>{
             });
         }, 2000);
     
-        return () => clearInterval(interval); // Cleanup when unmounting
+        return () => clearInterval(interval); 
     }, [imgIndex]);
 
     return(
