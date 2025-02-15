@@ -167,3 +167,32 @@ Added an Edit button on the product card.
 Implemented auto-filled form for editing existing product details.
 Connected frontend with backend to send PUT requests.
 Handled errors and ensured data validation.
+
+# Milestone 14:-
+
+Edit & Delete Product Functionality 
+Created a PUT API endpoint to update product details in MongoDB. 
+Added an Edit button on the product card. 
+Implemented auto-filled form for editing existing product details. 
+Connected frontend with backend to send PUT requests. 
+Handled errors and ensured data validation. 
+Created a DELETE API endpoint to remove products from MongoDB. 
+Added a Delete button to the product card. 
+Integrated frontend with backend to send DELETE requests. 
+
+# Milestone 15:- 
+
+Create a New Nav Component
+The Navbar should include links to the following pages:
+- Home
+- My Products
+- Add Product
+- Cart
+Navbar is responsive and adapts to different screen sizes.
+Add Navbar to All Pages
+Import and integrate the Nav component into all pages.
+Ensure smooth navigation between different sections of the application.
+Make the Navigation Smooth & User-Friendly
+Use React Router for handling navigation.
+Implement active link highlighting for better UX.
+Optimize the layout to be mobile-friendly.
