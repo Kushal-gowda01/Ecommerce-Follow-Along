@@ -1,6 +1,7 @@
-import React,{useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Product } from "../component/Product";
-import axios from 'axios'
+import axios from 'axios';
+import { NavBar } from '../component/nav';
 
 
 // const productdetails = [
@@ -23,48 +24,46 @@ import axios from 'axios'
 //         description: "This is a product3"
 //     }
 // ]
-export const Home =()=>{
 
-    const [productDetails,setProductDetails]=useState([])
-    const [loading,setLoading]=useState(true);
-    const [error,setError]=useState("")
+export const Home = () => {
+    const [productDetails, setProductDetails] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
 
-    useEffect(()=>{
-        async ()=>{
-            await axios.fetch("http://localhost:3000/product/get-products")
-        .then((res)=>{
-            if (!res.ok){
-                throw new Error(`HTTP Error! status:${res.status}`)
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const res = await axios.get("http://localhost:3000/product/get-products");
+                setProductDetails(res.data.Products);
+                setLoading(false);
+            } catch (err) {
+                console.error("Error fetching products:", err);
+                setError(err.message);
+                setLoading(false);
             }
-            return res.json()
-        }).then((data)=>{
-            setProductDetails(data.Products);
-            setLoading(false);
-            
-        }).catch((err)=>{
-            console.error(err)
-            setError(err)
-        })
-        }
-        
-    })
-    return(
+        };
+
+        fetchProducts();
+    }, []); 
+    return (
         <>
-        <div className="p-4 display flex justify-center items-center">
-        <h1 className="text-4xl font-bold text-indigo-900">Welcome to our Store</h1>
-        </div>
-        <div className="w-full min-h-screeen p-4 display flex justify-center items-center mt-20">
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-            {productDetails.map((product,index)=>{
-                return(
-                    <>
-                    <Product {...product}/>
-                    </>
-                )
-            }
-            )}
-        </div>
-        </div>
+            <NavBar />
+            <div className="p-4 flex justify-center items-center">
+                <h1 className="text-4xl font-bold text-indigo-900">Welcome to our Store</h1>
+            </div>
+            <div className="w-full min-h-screen p-4 flex justify-center items-center mt-20">
+                {loading ? (
+                    <p>Loading products...</p>
+                ) : error ? (
+                    <p className="text-red-500">Error: {error}</p>
+                ) : (
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+                        {productDetails.map((product, index) => (
+                            <Product key={index} {...product} />
+                        ))}
+                    </div>
+                )}
+            </div>
         </>
-    )
-}
+    );
+};
