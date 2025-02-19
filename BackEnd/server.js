@@ -2,6 +2,9 @@ const express=require('express');
 const app=express();
 const connectDB=require('./src/database/db');
 const userRouter=require('./src/controllers/user');
+//const productRouter = require('./src/controllers/product');
+
+
 
 require('dotenv').config({
     path:'./src/Config/.env'

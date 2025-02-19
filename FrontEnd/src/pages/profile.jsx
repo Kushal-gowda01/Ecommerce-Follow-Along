@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import AddressCard from "../component/AdressCard";
-import NavBar from "../component/nav";
+import AddressCard from "../component/AdressCard.jsx";
+import NavBar from "../component/nav.jsx";
 export default function Profile() {
 	const [personalDetails, setPersonalDetails] = useState({
 		name: "",
@@ -114,4 +114,4 @@ export default function Profile() {
 			</div>
 		</>
 	);
-}   
+}

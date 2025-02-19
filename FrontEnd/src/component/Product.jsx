@@ -1,12 +1,9 @@
-import React,{useEffect,useState} from 'react';
-import "../component/product.css"
-import PropTypes from 'prop-types';
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-export const Product  = ({ _id, name, images, description, price })=>{
-
+function Product({ _id, name, images, description, price }) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const navigate = useNavigate();
-
     useEffect(() => {
         if (!images || images.length === 0) return;
         const interval = setInterval(() => {
@@ -15,34 +12,28 @@ export const Product  = ({ _id, name, images, description, price })=>{
         return () => clearInterval(interval);
     }, [images]);
 
-    const currentImage = images && images.length > 0 ? images[currentIndex] : null;
-
-    const handleEdit = () => {
-        navigate(`/create-product/${_id}`);
-    };
-
-    const handleDelete = async () => {
-        try {
-            const response = await axios.delete(
-                `http://localhost:8000/api/v2/product/delete-product/${_id}`
-            );
-            if (response.status === 200) {
-                alert("Product deleted successfully!");
-                // Reload the page or fetch products again
-                window.location.reload();
-            }
-        } catch (err) {
-            console.error("Error deleting product:", err);
-            alert("Failed to delete product.");
-        }
-    };
-
-    return(
-        <div className="bg-white rounded-lg shadow-lg p-4">
-            <img src={image} alt="product" className="w-80 h-100 object-cover"/>
-            <h1 className="text-lg font-bold text-neutral-900">{name}</h1>
-            <p className="text-neutral-500">{price}</p>
-            <p className="text-neutral-700">{description}</p>
-        </div>
-    )
+    const currentImage = images[currentIndex];
+    
+    return (
+        <div className="bg-neutral-200 p-4 rounded-lg shadow-md flex flex-col justify-between">
+      <div className="w-full ">
+        <img src={`http://localhost:8000${currentImage}`} // Ensure the URL is correct\
+          alt={name}
+          className="w-full h-56 object-cover rounded-lg mb-2"
+        />
+        <h2 className="text-lg font-bold">{name}</h2>
+        <p className="text-sm opacity-75 mt-2">{description}</p>
+      </div>
+      <div className="w-full mt-4">
+        <p className="text-lg font-bold my-2">${price.toFixed(2)}</p>
+        <button className="w-full text-white px-4 py-2 rounded-md bg-neutral-900 hover:bg-neutral-700 transition duration-300"
+          onClick={() => navigate(`/product/${_id}`)}
+        >
+          More Info
+        </button>
+      </div>
+    </div>
+  );
 }
+
+export default Product;

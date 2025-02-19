@@ -10,16 +10,16 @@ export default function ProductDetails() {
 	const [product, setProduct] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
-	const [quantity, setQuantity] = useState(1);
-	const email = "abc@gmail.com";
+	const [quantity, setQuantity] = useState(1); // 1. Initialize quantity state
+	const email = "luckyhard456@gmail.com";
 	useEffect(() => {
 		const fetchProduct = async () => {
 			try {
 				const response = await axios.get(
-					`http://localhost:5173/api/v2/product/product/${id}`
+					`http://localhost:8000/api/v2/product/product/${id}`
 				);
 				console.log("Fetched product:", response.data.product);
-				setProduct(response.data.product);
+				setProduct(response.data.product); // Ensure correct state setting
 				setLoading(false);
 			} catch (err) {
 				console.error("Error fetching product:", err);
@@ -29,15 +29,18 @@ export default function ProductDetails() {
 		};
 		fetchProduct();
 	}, [id]);
+	// Log the updated product state whenever it changes
 	useEffect(() => {
 		if (product !== null) {
 			console.log("Updated product state:", product);
 			console.log("Product name:", product.name);
 		}
 	}, [product]);
+	// 2. Handler to increment quantity
 	const handleIncrement = () => {
 		setQuantity((prevQuantity) => prevQuantity + 1);
 	};
+	// 3. Handler to decrement quantity, ensuring it doesn't go below 1
 	const handleDecrement = () => {
 		setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1));
 	};
@@ -149,20 +152,24 @@ export default function ProductDetails() {
 										${product.price}
 									</p>
 								</div>
+								{/* 4. Update Quantity Section */}
 								<div className="flex flex-col gap-y-3">
 									<div className="text-xl font-medium text-gray-700">
 										Quantity
 									</div>
 									<div className="flex flex-row items-center gap-x-2">
+										{/* 5. Attach onClick to Increment Button */}
 										<div
 											onClick={handleIncrement}
 											className="flex justify-center items-center bg-gray-200 hover:bg-gray-300 active:translate-y-1 p-2 rounded-xl cursor-pointer"
 										>
 											<IoIosAdd />
 										</div>
+										{/* 6. Display Current Quantity */}
 										<div className="px-5 py-1 text-center bg-gray-100 rounded-xl pointer-events-none">
 											{quantity}
 										</div>
+										{/* 7. Attach onClick to Decrement Button */}
 										<div
 											onClick={handleDecrement}
 											className="flex justify-center items-center bg-gray-200 hover:bg-gray-300 active:translate-y-1 p-2 rounded-xl cursor-pointer"

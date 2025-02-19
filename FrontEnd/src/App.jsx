@@ -1,25 +1,23 @@
+import React from 'react'
+import { BrowserRouter,Routes,Route } from 'react-router-dom';
+import {LoginPage,SignupPage,Home,CreateProduct, MyProducts, Cart , ProductDetails, Profile} from "./Routes";
+import "./App.css";
 
-import './App.css'
-import {Route, Routes} from 'react-router-dom'
-import Login from './component/Login'
-import Signup from './component/signup'
-import { Home } from './page/home'
-import { Productform } from './component/productform'
-
-
-function App() {
-  
-
+const App = () => {
   return (
-    <>
+    <BrowserRouter>
       <Routes>
-        <Route path ="/login" element = {<Login />} />
-        <Route path="/signup" element = {<Signup/>}/>
-        <Route path="/" element = {<Home/>}/>
-        <Route path ="/productform" element = {<Productform/>}/>
+        <Route path='/' element={<Home/>}/>
+        <Route path='/login' element={<LoginPage/>}/>
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/createproduct" element={<CreateProduct />} />
+        <Route path="/createproduct/:id" element={<CreateProduct />} />
+        <Route path="/myproducts" element={<MyProducts />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
-    </>
+    </BrowserRouter>
   )
 }
 
