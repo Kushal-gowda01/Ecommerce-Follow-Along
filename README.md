@@ -167,3 +167,14 @@ Added an Edit button on the product card.
 Implemented auto-filled form for editing existing product details.
 Connected frontend with backend to send PUT requests.
 Handled errors and ensured data validation.
+
+# Milestone 14:-
+Edit & Delete Product Functionality 
+Created a PUT API endpoint to update product details in MongoDB. 
+Added an Edit button on the product card. 
+Implemented auto-filled form for editing existing product details. 
+Connected frontend with backend to send PUT requests. 
+Handled errors and ensured data validation. 
+Created a DELETE API endpoint to remove products from MongoDB. 
+Added a Delete button to the product card. 
+Integrated frontend with backend to send DELETE requests. 
