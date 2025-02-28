@@ -2,7 +2,7 @@ const express=require('express');
 const app=express();
 const connectDB=require('./src/database/db');
 const userRouter=require('./src/controllers/user');
-//const productRouter = require('./src/controllers/product');
+const productRouter = require('./src/controllers/product');
 
 
 

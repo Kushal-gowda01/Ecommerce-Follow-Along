@@ -7,7 +7,7 @@ const NavBar = () => {
         setIsOpen(!isOpen);
     };
     return (
-        <nav className="bg-purple-600">
+        <nav className="bg-blue-800">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between h-16">
                     <div className="flex items-center md:hidden">
@@ -69,7 +69,7 @@ const NavBar = () => {
                             </li>
                             <li>
                                 <NavLink
-                                    to="/my-products"
+                                    to="/myproducts"
                                     className={({ isActive }) =>
                                         isActive
                                             ? "text-white font-semibold px-3 py-2 rounded-md text-md transition-colors duration-200"
@@ -81,7 +81,7 @@ const NavBar = () => {
                             </li>
                             <li>
                                 <NavLink
-                                    to="/create-product"
+                                    to="/createproduct"
                                     className={({ isActive }) =>
                                         isActive
                                             ? "text-white font-semibold px-3 py-2 rounded-md text-md transition-colors duration-200"

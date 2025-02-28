@@ -75,7 +75,7 @@ router.post(
 );
 
 // Route: Get all products
-router.get("/get-products", async (req, res) => {
+router.get("/getproducts", async (req, res) => {
   try {
     const products = await Product.find();
     const productsWithFullImageUrl = products.map((product) => {
@@ -94,7 +94,7 @@ router.get("/get-products", async (req, res) => {
   }
 });
 
-router.get('/my-products', async (req, res) => {
+router.get('/myproducts', async (req, res) => {
   const { email } = req.query;
   try {
       const products = await Product.find({ email });
@@ -129,7 +129,7 @@ router.get('/product/:id', async (req, res) => {
   }
 });
 
-router.put('/update-product/:id', pupload.array('images', 10), async (req, res) => {
+router.put('/updateproduct/:id', pupload.array('images', 10), async (req, res) => {
   const { id } = req.params;
   const { name, description, category, tags, price, stock, email } = req.body;
   try {
@@ -173,7 +173,7 @@ router.put('/update-product/:id', pupload.array('images', 10), async (req, res) 
   }
 });
 
-router.delete('/delete-product/:id', async (req, res) => {
+router.delete('/deleteproduct/:id', async (req, res) => {
   const { id } = req.params;
   try {
       const existingProduct = await Product.findById(id);
