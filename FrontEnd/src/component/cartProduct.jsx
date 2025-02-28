@@ -57,7 +57,7 @@ export default function CartProduct({ _id, name, images, quantity, price }) {
 		<div className="h-max w-full p-4 flex justify-between border-b border-neutral-300 bg-neutral-100 rounded-lg">
 			<div className="flex flex-col gap-y-2">
 				<img
-					src={`http://localhost:8000${currentImage}`} // Ensure the URL is correct\
+					src={`http://localhost:3000${currentImage}`}
 					alt={name}
 					className="w-32 h-32 object-cover rounded-lg border border-neutral-300"
 				/>

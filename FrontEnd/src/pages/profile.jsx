@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import AddressCard from "../component/AdressCard.jsx";
-import NavBar from "../component/nav.jsx";
+import { useNavigate } from "react-router-dom";
+import AddressCard from "../component/AdressCard";
+import NavBar from "../component/nav";
 export default function Profile() {
 	const [personalDetails, setPersonalDetails] = useState({
 		name: "",
@@ -9,9 +10,10 @@ export default function Profile() {
 		avatarUrl: "",
 	});
 	const [addresses, setAddresses] = useState([]);
+	const navigate = useNavigate();
 	useEffect(() => {
 		fetch(
-			`http://localhost:8000/api/v2/user/profile?email=${"luckyhard456@gmail.com"}`,
+			`http://localhost:3000/api/v2/user/profile?email=${"kushalgowda@gmail.com"}`,
 			{
 				method: "GET",
 				headers: {
@@ -32,6 +34,11 @@ export default function Profile() {
 				console.log("Addresses fetched:", data.addresses);
 			});
 	}, []);
+
+	const handleAddAddress = () => {
+		navigate("/create-address");
+	};
+
 	return (
 		<>
 			<NavBar />
@@ -95,7 +102,10 @@ export default function Profile() {
 							</h1>
 						</div>
 						<div className="w-full h-max p-5">
-							<button className="w-max px-3 py-2 bg-neutral-600 text-neutral-100 rounded-md text-center hover:bg-neutral-100 hover:text-black transition-all duration-100">
+							<button
+								className="w-max px-3 py-2 bg-neutral-600 text-neutral-100 rounded-md text-center hover:bg-neutral-100 hover:text-black transition-all duration-100"
+								onClick={handleAddAddress}
+							>
 								Add Address
 							</button>
 						</div>
