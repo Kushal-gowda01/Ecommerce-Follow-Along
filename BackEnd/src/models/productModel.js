@@ -1,58 +1,47 @@
-const { model, Schema, models } = require("mongoose");
 
-const userSchema = new Schema(
+const mongoose = require("mongoose");
+const productSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, "Please enter your name!"],
-    },
-    email: {
-      type: String,
-      required: [true, "Please enter your email!"],
-      unique: true,
-      validate: {
-        validator: function (value) {
-          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-        },
-        message: "Please enter a valid email address",
-      },
-    },
-    price: {
-      type: Number,
-      required: [true, "Please enter your price"],
-      min: [1, "Price should be greater than 0"],
+      required: [true, "Please provide the product name"],
     },
     description: {
       type: String,
-      required: [true, "Please enter your description"],
-      minLength: [8, "Description should be greater than 8 characters"],
+      required: [true, "Please provide the product description"],
     },
     category: {
       type: String,
-      required: [true, "Please enter your category"],
+      required: [true, "Please provide the product category"],
+    },
+    tags: {
+      type: [String], // Array of tags
+      default: [],
+    },
+    price: {
+      type: Number,
+      required: [true, "Please provide the product price"],
     },
     stock: {
       type: Number,
-      required: [true, "Please enter your stock"],
-      min: [1, "Stock should be greater than 0"],
+      required: [true, "Please provide the product stock"],
     },
-    tags: {
-      type: [String],
-      required: [true, "Please enter your tags"],
+    email: {
+      type: String,
+      required: [true, "Please provide an email"],
+      match: [/.+@.+\..+/, "Please provide a valid email address"],
     },
     images: {
-      type: [String],
-      required: [true, "Please add your images"],
+      type: [String], // Array of image URLs (base64 or hosted links)
+      required: [true, "Please upload product images"],
     },
     createdAt: {
       type: Date,
-      default: Date.now,
+      default: Date.now, // Automatically set the creation date
     },
   },
   {
     timestamps: true,
   }
 );
-
-// ✅ Prevent model recompilation issue
-module.exports = models.User || model("User", userSchema);
+module.exports = mongoose.model("Product", productSchema);

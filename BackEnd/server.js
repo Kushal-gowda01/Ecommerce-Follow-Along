@@ -1,32 +1,31 @@
-const express=require('express');
-const app=express();
-const connectDB=require('./src/database/db');
-const userRouter=require('./src/controllers/user');
-const productRouter = require('./src/controllers/product');
+const app = require("./app");
 
+const connectDatabase = require("./src/database/db");
 
-
-require('dotenv').config({
-    path:'./src/Config/.env'
+process.on("uncaughtException", (err) => {
+    console.log(`Error: ${err.message}`); // Log the error message
+    console.log("Shutting down the server for handling uncaught exception");
+    process.exit(1);
 });
 
-const port=process.env.port;
-const url=process.env.db_url;
+if (process.env.NODE_ENV !== "PRODUCTION") {
+    require("dotenv").config({
+        path: "config/.env",
+    });
+}
 
-app.listen(3000,async ()=>{
-    console.log(`Server is running on port ${port}`);
-    try{
-        await connectDB(url);
-    }catch(error){
-        console.log(error);
-    }
-})
+connectDatabase();
 
-app.use(express.json());
+const server = app.listen(process.env.PORT, () => {
+    console.log(
+        `Server is running on http://localhost:${process.env.PORT}` // Log the server's URL
+    );
+});
 
- app.use('/auth',userRouter)
- app.use('/product',productRouter);
- 
- app.get('/',(req,res)=>{
-    res.send('Hello from the server!')
-})
+process.on("unhandledRejection", (err) => {
+    console.error(`Unhandled Rejection: ${err.message}`); // Log the error message
+    console.log("Shutting down the server due to unhandled promise rejection.");
+    server.close(() => {
+        process.exit(1); 
+    });
+});

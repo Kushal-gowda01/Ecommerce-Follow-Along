@@ -1,10 +1,10 @@
 const express = require("express");
 const app = express(); 
-const ErrorHandler = require("../BackEnd/src/middleware/error");
+const ErrorHandler = require("./src/middleware/error");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const product= require('./src/controllers/product');
+const product= require('./src/controllers/product')
 const path=require('path')
 
 app.use(express.json());
@@ -21,7 +21,7 @@ if (process.env.NODE_ENV !== "PRODUCTION") {
     });
 };
 //import Routes
-const user = require("./controller/user");
+const user = require("./src/controllers/user");
 app.use("/api/v2/user", user);
 app.use("/api/v2/product", product);
 // Serve static files for uploads and products
