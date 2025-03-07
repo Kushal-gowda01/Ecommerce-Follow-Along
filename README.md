@@ -291,3 +291,16 @@ Use React Router for navigation.
 - Ensured that the `User` schema has an `address` field as an array.
 3. Test the Endpoint
 - Used Thunder Client, Postman, or a frontend form to test the functionality.
+
+---
+# Milestone 23: 
+Implementing Place Order Functionality 
+
+1. **Create a Place Order Button**
+   - Inside the **Cart Page**, add a `Place Order` button.
+   - When clicked, navigate to the **Select Address** page.
+2. **Create the Select Address Page**
+   - Display all available addresses of the user.
+   - Provide an option to **select one address**.
+3. **Backend Endpoint for User Addresses**
+   - Write a backend API endpoint to fetch all the addresses of the user

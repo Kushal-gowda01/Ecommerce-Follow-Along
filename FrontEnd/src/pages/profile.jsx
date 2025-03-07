@@ -36,7 +36,7 @@ export default function Profile() {
 	}, []);
 
 	const handleAddAddress = () => {
-		navigate("/create-address");
+		navigate("/createaddress");
 	};
 
 	return (
