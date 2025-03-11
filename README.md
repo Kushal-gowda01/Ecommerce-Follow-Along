@@ -304,3 +304,25 @@ Implementing Place Order Functionality
    - Provide an option to **select one address**.
 3. **Backend Endpoint for User Addresses**
    - Write a backend API endpoint to fetch all the addresses of the user
+
+      ---
+# Milestone 24: 
+Finalizing the Order Process 
+
+1. **Display Ordered Products**
+   - Show all the products that the user is ordering.
+2. **Display Selected Address**
+   - Show the address chosen by the user for delivery.
+3. **Show Cart Total Value**
+   - Calculate and display the total amount of the cart.
+4. **Add Place Order Button**
+   - At the bottom, provide a `Place Order` button to confirm the order.
+
+---
+
+# Milestone 25 
+
+1. create an endpoint that will receive the products, user, address details.
+2. get the mail of the user using that you need to retrive the _id of the user
+3. the order will be different with same address
+4. created earlier you will store order details in mongodb order collection
