@@ -332,3 +332,9 @@ Finalizing the Order Process
 1. created an endpoint that will receive the user mail
 2. the mail of the user to retrive the _id of the user
 3. Using that _id it  get all the orders of that user
+
+## Milestone 27: 
+Created a page for displaying the order details
+
+1. Connected frontend and backend
+2. Created a frontend route for displaying order details
