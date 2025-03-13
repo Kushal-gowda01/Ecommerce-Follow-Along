@@ -323,6 +323,12 @@ Finalizing the Order Process
 # Milestone 25 
 
 1. create an endpoint that will receive the products, user, address details.
-2. get the mail of the user using that you need to retrive the _id of the user
+2. get the mail of the user using that retrive the _id of the user
 3. the order will be different with same address
-4. created earlier you will store order details in mongodb order collection
+4. created earlier  store order details in mongodb order collection
+
+# Milestone 26
+
+1. created an endpoint that will receive the user mail
+2. the mail of the user to retrive the _id of the user
+3. Using that _id it  get all the orders of that user

@@ -12,7 +12,7 @@ const bcrypt = require("bcryptjs");
 require("dotenv").config();
 
 router.post(
-    "/create-user",
+    "/createuser",
     upload.single("file"), // Expect file to be named "file"
     catchAsyncErrors(async (req, res, next) => {
       console.log("Creating user...");

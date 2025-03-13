@@ -12,15 +12,15 @@ const SelectAddress = () => {
     const navigate = useNavigate();
     // Optionally, get the authenticated user's email from context or props
     // const { user } = useAuth();
-    const userEmail = 'luckyhard456@gmail.com'; // Replace with dynamic email in production
+    const userEmail = ''; // Replace with dynamic email in production
     useEffect(() => {
         const fetchAddresses = async () => {
             try {
                 const response = await axios.get('http://localhost:8000/api/v2/user/addresses', {
                     params: { email: userEmail },
                 });
+    
                 if (response.status !== 200) {
-                    // Handle specific HTTP errors
                     if (response.status === 404) {
                         throw new Error('User not found.');
                     } else if (response.status === 400) {
@@ -29,8 +29,8 @@ const SelectAddress = () => {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
                 }
+    
                 const data = response.data;
-                // Validate the response structure
                 if (data && Array.isArray(data.addresses)) {
                     setAddresses(data.addresses);
                 } else {
@@ -44,8 +44,17 @@ const SelectAddress = () => {
                 setLoading(false);
             }
         };
+    
         fetchAddresses();
     }, [userEmail]);
+    
+    // Navigate to Add Address page if no addresses are found
+    useEffect(() => {
+        if (!loading && addresses.length === 0) {
+            navigate('/createaddress'); // Adjust this path as needed
+        }
+    }, [addresses, loading, navigate]);
+    
     const handleSelectAddress = (addressId) => {
         // Navigate to Order Confirmation with the selected address ID and email
         navigate('/order-confirmation', { state: { addressId, email: userEmail } });

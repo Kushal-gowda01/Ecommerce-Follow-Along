@@ -16,7 +16,7 @@ const OrderConfirmation = () => {
 
     useEffect(() => {
         if (!addressId || !email) {
-            navigate('/select-address');
+            navigate('/selectaddress');
             return;
         }
         const fetchData = async () => {
