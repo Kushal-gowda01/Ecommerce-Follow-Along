@@ -3,7 +3,7 @@ const router = express.Router();
 const Order = require('../models/order'); 
 const User = require('../models/userModel');   
 
-router.post('/place-order', async (req, res) => {
+router.post('/placeorder', async (req, res) => {
     try {
         const { email, orderItems, shippingAddress } = req.body;
         if (!email) {   
@@ -39,7 +39,7 @@ router.post('/place-order', async (req, res) => {
     }
 });
 
-router.get('/my-orders', async (req, res) => {
+router.get('/myorders', async (req, res) => {
     try {
         const { email } = req.query;
 
@@ -86,6 +86,24 @@ router.get('/getOrders', async (req, res) => {
         res.status(500).json({ message: "Error fetching orders", error });
     }
 });
+router.patch('/cancelorder/:orderId', async (req, res) => {
+    try {
+        const { orderId } = req.params;
+        console.log("fff")
+        const order = await Order.findById(orderId);
+        console.log(order);
+        if (!order) {
+            return res.status(404).json({ message: 'Order not found.' });
+        }
 
+        order.orderStatus = 'Cancelled';
+        await order.save();
+
+        res.status(200).json({ message: 'Order cancelled successfully.', order });
+    } catch (error) {
+        console.error('Error cancelling order:', error);
+        res.status(500).json({ message: error.message });
+    }
+});
 
 module.exports = router;

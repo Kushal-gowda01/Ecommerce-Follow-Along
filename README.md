@@ -332,3 +332,18 @@ Finalizing the Order Process
 1. created an endpoint that will receive the user mail
 2. the mail of the user to retrive the _id of the user
 3. Using that _id it  get all the orders of that user
+
+### Milestone 27: 
+Frontend page for displaying all the orders.
+
+- created an my-orders page
+- get request to my-orders endpoint that we created in previous milestone.
+- Displayed all the user orders
+- added my-orders page in navbar for better navigation.
+
+
+### Milestone 28: 
+Feature to cancel the placed orders.
+
+- In my-orders page for every order added cancel order button
+- created an endpoint that will receive the order-id

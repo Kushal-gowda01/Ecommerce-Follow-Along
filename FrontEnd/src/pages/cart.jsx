@@ -30,7 +30,7 @@ const Cart = () => {
       console.log("Products:", products);
 
       const handlePlaceOrder = () => {
-        navigate('/select-address'); // Navigate to the Select Address page
+        navigate('/selectaddress'); // Navigate to the Select Address page
       };
 
       return (

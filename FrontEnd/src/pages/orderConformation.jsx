@@ -72,7 +72,7 @@ const OrderConfirmation = () => {
             }
             const data = response.data;
             console.log('Order placed:', data.order);
-            navigate('/order-success', { state: { order: data.order } });
+            navigate('/ordersuccess', { state: { order: data.order } });
         } catch (err) {
             console.error('Error placing order:', err);
             setError(err.response?.data?.message || err.message || 'An unexpected error occurred while placing the order.');
