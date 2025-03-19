@@ -1,8 +1,8 @@
-// OrderConfirmation.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import NavBar from '../component/nav';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 const OrderConfirmation = () => {
     const location = useLocation();
@@ -13,6 +13,7 @@ const OrderConfirmation = () => {
     const [totalPrice, setTotalPrice] = useState(0);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [paymentMethod, setPaymentMethod] = useState("COD"); // Default to COD
 
     useEffect(() => {
         if (!addressId || !email) {
@@ -33,6 +34,7 @@ const OrderConfirmation = () => {
                     throw new Error('Selected address not found.');
                 }
                 setSelectedAddress(address);
+
                 const cartResponse = await axios.get('http://localhost:8000/api/v2/product/cartproducts', {
                     params: { email: email },
                 });
@@ -60,12 +62,13 @@ const OrderConfirmation = () => {
         fetchData();
     }, [addressId, email, navigate]);
 
-    const handlePlaceOrder = async () => {
+    const handlePlaceOrder = async (isPaid = false) => {
         try {
             setLoading(true);
             const response = await axios.post('http://localhost:8000/api/v2/order/place', {
                 email,
                 addressId,
+                isPaid,
             });
             if (response.status !== 200 && response.status !== 201) {
                 throw new Error(response.data.message || 'Failed to place order.');
@@ -80,6 +83,7 @@ const OrderConfirmation = () => {
             setLoading(false);
         }
     };
+
     if (loading) {
         return (
             <div className='w-full h-screen flex justify-center items-center'>
@@ -100,12 +104,14 @@ const OrderConfirmation = () => {
             </div>
         );
     }
+
     return (
         <div className='w-full min-h-screen flex flex-col'>
             <NavBar />
             <div className='flex-grow flex justify-center items-start p-4'>
                 <div className='w-full max-w-4xl border border-neutral-300 rounded-md flex flex-col p-6 bg-white shadow-md'>
                     <h2 className='text-2xl font-semibold mb-6 text-center'>Order Confirmation</h2>
+
                     {/* Selected Address */}
                     <div className='mb-6'>
                         <h3 className='text-xl font-medium mb-2'>Shipping Address</h3>
@@ -121,6 +127,7 @@ const OrderConfirmation = () => {
                             <p>No address selected.</p>
                         )}
                     </div>
+
                     {/* Cart Items */}
                     <div className='mb-6'>
                         <h3 className='text-xl font-medium mb-2'>Cart Items</h3>
@@ -130,7 +137,7 @@ const OrderConfirmation = () => {
                                     <div key={item._id} className='flex justify-between items-center border p-4 rounded-md'>
                                         <div className='flex items-center'>
                                             <img
-                                                src={item.images && item.images.length > 0 ? item.images[0] : '/default-avatar.png'} // Use first image or fallback
+                                                src={item.images && item.images.length > 0 ? item.images[0] : '/default-avatar.png'}
                                                 alt={item.name}
                                                 className='w-16 h-16 object-cover rounded-md mr-4'
                                             />
@@ -140,9 +147,7 @@ const OrderConfirmation = () => {
                                                 <p className='text-sm text-gray-600'>Price: ${item.price.toFixed(2)}</p>
                                             </div>
                                         </div>
-                                        <div>
-                                            <p className='font-semibold'>${(item.price * item.quantity).toFixed(2)}</p>
-                                        </div>
+                                        <p className='font-semibold'>${(item.price * item.quantity).toFixed(2)}</p>
                                     </div>
                                 ))}
                             </div>
@@ -150,26 +155,30 @@ const OrderConfirmation = () => {
                             <p>Your cart is empty.</p>
                         )}
                     </div>
-                    {/* Total Price */}
-                    <div className='mb-6 flex justify-end'>
-                        <p className='text-xl font-semibold'>Total: ${totalPrice.toFixed(2)}</p>
-                    </div>
+
                     {/* Payment Method */}
                     <div className='mb-6'>
-                        <h3 className='text-xl font-medium mb-2'>Payment Method</h3>
-                        <div className='p-4 border rounded-md'>
-                            <p>Cash on Delivery</p>
-                        </div>
+                        <h3 className='text-xl font-medium mb-2'>Select Payment Method</h3>
+                        <select value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)} className='p-2 border rounded-md'>
+                            <option value="COD">Cash on Delivery</option>
+                            <option value="PayPal">PayPal</option>
+                        </select>
                     </div>
-                    {/* Place Order Button */}
-                    <div className='flex justify-center'>
-                        <button
-                            onClick={handlePlaceOrder}
-                            className='bg-green-500 text-white px-6 py-3 rounded-md hover:bg-green-600 transition-colors'
-                        >
+
+                    {paymentMethod === "PayPal" && (
+                        <PayPalScriptProvider options={{ clientId: "YOUR_PAYPAL_CLIENT_ID" }}>
+                            <PayPalButtons
+                                createOrder={(data, actions) => actions.order.create({ purchase_units: [{ amount: { value: totalPrice.toFixed(2) } }] })}
+                                onApprove={(data, actions) => actions.order.capture().then(() => handlePlaceOrder(true))}
+                            />
+                        </PayPalScriptProvider>
+                    )}
+
+                    {paymentMethod === "COD" && (
+                        <button onClick={() => handlePlaceOrder(false)} className='bg-green-500 text-white px-6 py-3 rounded-md hover:bg-green-600'>
                             Place Order
                         </button>
-                    </div>
+                    )}
                 </div>
             </div>
         </div>

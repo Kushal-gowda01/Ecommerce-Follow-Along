@@ -347,3 +347,8 @@ Feature to cancel the placed orders.
 
 - In my-orders page for every order added cancel order button
 - created an endpoint that will receive the order-id
+
+### Milestone 29:
+- created an PayPal account .
+- Created a radio buttons to select COD or online payment 
+- when we click on online payment PayPal buttons will displayed.
