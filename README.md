@@ -352,3 +352,8 @@ Feature to cancel the placed orders.
 - created an PayPal account .
 - Created a radio buttons to select COD or online payment 
 - when we click on online payment PayPal buttons will displayed.
+
+## Milestone 30:
+- Implemented the online payment using PayPal API using the client key that created earlier.
+- Downloaded the NPM package called react-paypal-js that will provide an component called.
+- PayPalScriptProvider which  display online payment methods like credit or debit card etc.

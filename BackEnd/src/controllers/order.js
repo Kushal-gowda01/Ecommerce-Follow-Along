@@ -96,7 +96,7 @@ router.patch('/cancelorder/:orderId', async (req, res) => {
             return res.status(404).json({ message: 'Order not found.' });
         }
 
-        order.orderStatus = 'Cancelled';
+        order.orderStatus = 'cancelled';
         await order.save();
 
         res.status(200).json({ message: 'Order cancelled successfully.', order });

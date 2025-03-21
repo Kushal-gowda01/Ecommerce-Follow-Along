@@ -166,7 +166,7 @@ const OrderConfirmation = () => {
                     </div>
 
                     {paymentMethod === "PayPal" && (
-                        <PayPalScriptProvider options={{ clientId: "YOUR_PAYPAL_CLIENT_ID" }}>
+                        <PayPalScriptProvider options={{ clientId: "YOUR_PAYPAL_CLIENT_Id" }}>
                             <PayPalButtons
                                 createOrder={(data, actions) => actions.order.create({ purchase_units: [{ amount: { value: totalPrice.toFixed(2) } }] })}
                                 onApprove={(data, actions) => actions.order.capture().then(() => handlePlaceOrder(true))}
