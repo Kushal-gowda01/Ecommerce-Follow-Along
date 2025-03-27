@@ -357,3 +357,18 @@ Feature to cancel the placed orders.
 - Implemented the online payment using PayPal API using the client key that created earlier.
 - Downloaded the NPM package called react-paypal-js that will provide an component called.
 - PayPalScriptProvider which  display online payment methods like credit or debit card etc.
+
+## Milestone 31:
+- setEmail that will help in storing email state inside global state.
+- APP component inside provider component with store as props.
+
+## Milestone 32:
+
+- Login page will be using Dispatch method to store the mail inside global state
+- the mail stored in global state using useSelector
+
+## Milestone 33:
+- Downloaded jsonwebtoken package using NPM
+- Used sign method to create an JWT token with mail and ID
+- maxAge to set expire time
+- Added the cookie inside the response that helps you to store the cookie inside browser.
