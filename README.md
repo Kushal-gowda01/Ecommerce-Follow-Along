@@ -357,3 +357,7 @@ Feature to cancel the placed orders.
 - Implemented the online payment using PayPal API using the client key that created earlier.
 - Downloaded the NPM package called react-paypal-js that will provide an component called.
 - PayPalScriptProvider which  display online payment methods like credit or debit card etc.
+
+  ## Milestone 31:
+- setEmail that will help in storing email state inside global state.
+- APP component inside provider component with store as props
