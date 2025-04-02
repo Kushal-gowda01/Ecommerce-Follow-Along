@@ -372,3 +372,8 @@ Feature to cancel the placed orders.
 - Used sign method to create an JWT token with mail and ID
 - maxAge to set expire time
 - Added the cookie inside the response that helps you to store the cookie inside browser.
+
+## Milestone 34:
+
+- Got the token from the browser cookie and sent it to the server
+- In backend an middleware function to validate that JWT token
