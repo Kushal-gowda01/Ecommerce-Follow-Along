@@ -5,11 +5,6 @@ import "./App.css";
 
 
 const App = () => {
-=======
-import './App.css'
-import {Route, Routes} from 'react-router-dom'
-import Login from './component/Login'
-
 
 function App() {
   
