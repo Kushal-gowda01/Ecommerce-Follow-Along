@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AddressCard from "../component/AdressCard";
-import NavBar from "../component/nav";
+import AddressCard from "../components/auth/AddressCard";
+import NavBar from "../components/auth/nav";
+import { useSelector } from "react-redux"; // Import useSelector
+import axios from "../axiosConfig";
+
 export default function Profile() {
+	// Retrieve email from Redux state
+	const email = useSelector((state) => state.user.email);
 	const [personalDetails, setPersonalDetails] = useState({
 		name: "",
 		email: "",
@@ -12,31 +17,21 @@ export default function Profile() {
 	const [addresses, setAddresses] = useState([]);
 	const navigate = useNavigate();
 	useEffect(() => {
-		fetch(
-			`http://localhost:3000/api/v2/user/profile?email=${"kushalgowda@gmail.com"}`,
-			{
-				method: "GET",
-				headers: {
-					"Content-Type": "application/json",
-				},
-			}
-		)
+		// Only fetch profile if email exists
+		if (!email) return;
+		axios
+ 			.get("/api/v2/user/profile", { params: { email } })
 			.then((res) => {
-				if (!res.ok) {
-					throw new Error(`HTTP error! status: ${res.status}`);
-				}
-				return res.json();
+				setPersonalDetails(res.data.user);
+				setAddresses(res.data.addresses);
+				console.log("User fetched:", res.data.user);
+				console.log("Addresses fetched:", res.data.addresses);
 			})
-			.then((data) => {
-				setPersonalDetails(data.user);
-				setAddresses(data.addresses);
-				console.log("User fetched:", data.user);
-				console.log("Addresses fetched:", data.addresses);
-			});
-	}, []);
+			.catch((err) => console.error(err));
+	}, [email]);
 
 	const handleAddAddress = () => {
-		navigate("/createaddress");
+		navigate("/create-address");
 	};
 
 	return (
@@ -61,7 +56,7 @@ export default function Profile() {
 									className="w-40 h-40 rounded-full"
 									onError={(e) => {
 										e.target.onerror = null; // Prevents infinite loop if the default image also fails
-										e.target.src = `https://cdn.vectorstock.com/i/500p/17/61/male-avatar-profile-picture-vector-10211761.jpg`;
+										e.target.src = "https://cdn.vectorstock.com/i/500x500/17/61/male-avatar-profile-picture-vector-10211761.jpg";
 									}}
 								/>
 							</div>
