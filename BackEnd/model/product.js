@@ -43,7 +43,7 @@ const productSchema = new mongoose.Schema(
           productid: {
               type: String,
               required: [true, "Please provide the product ID"],
-              unique: true,
+              // unique: true,
           },
           quantity: {
               type: Number,
