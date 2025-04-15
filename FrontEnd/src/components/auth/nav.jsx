@@ -128,6 +128,30 @@ const NavBar = () => {
                                      My Orders
                                  </NavLink>
                              </li>
+                             <li>
+                                 <NavLink
+                                     to="/login"
+                                     className={({ isActive }) =>
+                                         isActive
+                                             ? "text-white font-semibold px-3 py-2 rounded-md text-sm transition-colors duration-200"
+                                             : "text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm transition-colors duration-200"
+                                     }
+                                 >
+                                     Login
+                                 </NavLink>
+                             </li>
+                             <li>
+                                 <NavLink
+                                     to="/signup"
+                                     className={({ isActive }) =>
+                                         isActive
+                                             ? "text-white font-semibold px-3 py-2 rounded-md text-sm transition-colors duration-200"
+                                             : "text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm transition-colors duration-200"
+                                     }
+                                 >
+                                     Signup
+                                 </NavLink>
+                             </li>
                         </ul>
                     </div>
                 </div>
