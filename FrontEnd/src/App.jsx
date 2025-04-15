@@ -5,10 +5,7 @@ import "./App.css";
 
 
 const App = () => {
-
-function App() {
   
-
   return (
     <BrowserRouter>
       <Routes>
