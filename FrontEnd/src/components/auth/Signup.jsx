@@ -5,7 +5,7 @@ import { RxAvatar } from "react-icons/rx";
 import axios from "axios";
 import ValidationFormObject from "../../validation";
 import { useDispatch } from 'react-redux';
- import { setemail } from "../../store/userActions";
+  import { setemail } from "../../store/userActions";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -51,9 +51,9 @@ const Signup = () => {
     };
  // Axios request to backend
  axios
- .post("http://localhost:3000/api/v2/user/create-user", newForm, config)
+ .post("http://localhost:8000/api/v2/user/create-user", newForm, config)
  .then((res) => {
-   alert("User created successfully!"); // Success message from server
+  alert("User created successfully!"); // Success message from server
    console.log(res.data); // Success response from server
  })
  .catch((err) => {
@@ -197,7 +197,7 @@ const Signup = () => {
             <div className="flex items-center w-full">
               <h4>Already have an account?</h4>
               <Link to="/login" className="text-blue-600 pl-2">
-                Sign In
+                Log In
               </Link>
             </div>
           </form>

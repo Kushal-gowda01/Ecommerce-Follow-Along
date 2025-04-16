@@ -37,8 +37,8 @@ export default function Profile() {
 	return (
 		<>
 			<NavBar />
-			<div className="w-full min-h-screen bg-neutral-800 p-5">
-				<div className="w-full h-full bg-neutral-700 rounded-lg">
+			<div className="w-full min-h-screen bg-slate-50 p-5">
+				<div className="w-full h-full bg-zinc-500 rounded-lg">
 					<div className="w-full h-max my-2 p-5">
 						<div className="w-full h-max">
 							<h1 className="text-3xl text-neutral-100">
@@ -51,7 +51,7 @@ export default function Profile() {
 									PICTURE
 								</div>
 								<img
-									src={personalDetails.avatarUrl ? `http://localhost:3000/${personalDetails.avatarUrl}` : `https://cdn.vectorstock.com/i/500p/17/61/male-avatar-profile-picture-vector-10211761.jpg`}
+									src={personalDetails.avatarUrl ? `http://localhost:8000/${personalDetails.avatarUrl}` : `https://cdn.vectorstock.com/i/500p/17/61/male-avatar-profile-picture-vector-10211761.jpg`}
 									alt="profile"
 									className="w-40 h-40 rounded-full"
 									onError={(e) => {
