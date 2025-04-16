@@ -6,7 +6,7 @@ const NavBar = () => {
         setIsOpen(!isOpen);
     };
     return (
-        <nav className="bg-purple-600">
+        <nav className="bg-blue-400">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between h-16">
                     {/* Hamburger Menu Button (visible on mobile) */}
@@ -115,43 +115,43 @@ const NavBar = () => {
                                 >
                                     Profile
                                 </NavLink>
-                            </li>
-                            <li>
-                                 <NavLink
-                                     to="/myorders"
-                                     className={({ isActive }) =>
-                                         isActive
-                                             ? "text-white font-semibold px-3 py-2 rounded-md text-sm transition-colors duration-200"
-                                             : "text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm transition-colors duration-200"
-                                     }
-                                 >
-                                     My Orders
-                                 </NavLink>
-                             </li>
-                             <li>
-                                 <NavLink
-                                     to="/login"
-                                     className={({ isActive }) =>
-                                         isActive
-                                             ? "text-white font-semibold px-3 py-2 rounded-md text-sm transition-colors duration-200"
-                                             : "text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm transition-colors duration-200"
-                                     }
-                                 >
-                                     Login
-                                 </NavLink>
-                             </li>
-                             <li>
-                                 <NavLink
-                                     to="/signup"
-                                     className={({ isActive }) =>
-                                         isActive
-                                             ? "text-white font-semibold px-3 py-2 rounded-md text-sm transition-colors duration-200"
-                                             : "text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm transition-colors duration-200"
-                                     }
-                                 >
-                                     Signup
-                                 </NavLink>
-                             </li>
+                        </li>
+                        <li>
+                                  <NavLink
+                                      to="/myorders"
+                                      className={({ isActive }) =>
+                                          isActive
+                                              ? "text-white font-semibold px-3 py-2 rounded-md text-sm transition-colors duration-200"
+                                              : "text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm transition-colors duration-200"
+                                      }
+                                  >
+                                      My Orders
+                                  </NavLink>
+                              </li>
+                              <li>
+                                  <NavLink
+                                      to="/login"
+                                      className={({ isActive }) =>
+                                          isActive
+                                              ? "text-white font-semibold px-3 py-2 rounded-md text-sm transition-colors duration-200 bg-black"
+                                              : "text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm transition-colors duration-200 bg-black"
+                                      }
+                                  >
+                                      Login
+                                  </NavLink>
+                              </li>
+                              <li>
+                                  <NavLink
+                                      to="/signup"
+                                      className={({ isActive }) =>
+                                          isActive
+                                              ? "text-white font-semibold px-3 py-2 rounded-md text-sm transition-colors duration-200 bg-black"
+                                              : "text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm transition-colors duration-200 bg-black"
+                                      }
+                                  >
+                                      Sign up
+                                  </NavLink>
+                              </li>
                         </ul>
                     </div>
                 </div>
@@ -213,32 +213,6 @@ const NavBar = () => {
                                 Cart
                             </NavLink>
                         </li>
-                        <li>
-                             <NavLink
-                                 to="/profile"
-                                 className={({ isActive }) =>
-                                     isActive
-                                         ? "block text-white font-semibold px-3 py-2 rounded-md text-base transition-colors duration-200"
-                                         : "block text-gray-200 hover:text-white px-3 py-2 rounded-md text-base transition-colors duration-200"
-                                 }
-                                 onClick={() => setIsOpen(false)}
-                             >
-                                 Profile
-                             </NavLink>
-                         </li>
-                        <li>
-                             <NavLink
-                                 to="/myorders"
-                                 className={({ isActive }) =>
-                                     isActive
-                                         ? "block text-white font-semibold px-3 py-2 rounded-md text-base transition-colors duration-200"
-                                         : "block text-gray-200 hover:text-white px-3 py-2 rounded-md text-base transition-colors duration-200"
-                                 }
-                                 onClick={() => setIsOpen(false)}
-                             >
-                                 My Orders
-                             </NavLink>
-                         </li>
                     </ul>
                 </div>
             )}

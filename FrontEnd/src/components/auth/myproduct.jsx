@@ -23,7 +23,7 @@ function Myproduct({ _id, name, images, description, price }) {
     const handleDelete = async () => {
         try {
             const response = await axios.delete(
-                `http://localhost:3000/api/v2/product/delete-product/${_id}`
+                `http://localhost:8000/api/v2/product/delete-product/${_id}`
             );
             if (response.status === 200) {
                 alert("Product deleted successfully!");
@@ -42,7 +42,7 @@ function Myproduct({ _id, name, images, description, price }) {
                 <div className="w-full">
                     {currentImage && (
                         <img
-                            src={`http://localhost:3000${currentImage}`}
+                            src={`http://localhost:8000${currentImage}`}
                             alt={name}
                             className="w-full h-56 object-cover rounded-lg mb-2"
                         />
@@ -53,7 +53,7 @@ function Myproduct({ _id, name, images, description, price }) {
                 <div className="w-full mt-4">
                     <p className="text-lg font-bold my-2">${price.toFixed(2)}</p>
                     <button
-                        className="w-full text-white px-4 py-2 rounded-md bg-neutral-900 hover:bg-neutral-700 transition duration-300"
+                        className="w-full text-white px-4 py-2 rounded-md bg-blue-400 hover:bg-neutral-700 transition duration-300"
                         onClick={handleEdit}
                     >
                         Edit

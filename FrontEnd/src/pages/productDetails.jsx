@@ -97,7 +97,7 @@ export default function ProductDetails() {
 						<div className="w-full bsm:w-2/3 md:w-1/3 rounded-lg">
 							{product.images && product.images.length > 0 ? (
 								<img
-									src={`http://localhost:3000${product.images[0]}`}
+									src={`http://localhost:8000${product.images[0]}`}
 									alt={product.name}
 									className="w-full h-full object-contain bsm:object-cover"
 									style={{ maxHeight: "500px" }} // Adjust the max height as needed
@@ -185,7 +185,7 @@ export default function ProductDetails() {
 								</div>
 							</div>
 							<div className="flex flex-wrap gap-x-5 my-3">
-								<button className="bg-black text-white px-5 py-2 rounded-full hover:bg-neutral-800 hover:-translate-y-1.5 active:translate-y-0 transition-transform duration-200 ease-in-out" onClick={addtocart}>
+								<button className="bg-blue-400 text-white px-5 py-2 rounded-full hover:bg-neutral-800 hover:-translate-y-1.5 active:translate-y-0 transition-transform duration-200 ease-in-out" onClick={addtocart}>
 									Add to Cart
 								</button>
 							</div>

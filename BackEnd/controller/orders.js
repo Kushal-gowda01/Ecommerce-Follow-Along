@@ -1,13 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const Order = require('../model/order'); // Adjust path as needed
-const User = require('../model/user');   // Adjust path as needed
+const Order = require('../model/order'); 
+const User = require('../model/user');   
 const { isAuthenticatedUser } = require('../middleware/auth');
 
 router.post('/place-order', isAuthenticatedUser, async (req, res) => {
     try {
         const { email, orderItems, shippingAddress } = req.body;
-        // Validate request data
         if (!email) {   
             return res.status(400).json({ message: 'Email is required.' });
         }
@@ -17,18 +16,16 @@ router.post('/place-order', isAuthenticatedUser, async (req, res) => {
         if (!shippingAddress) {
             return res.status(400).json({ message: 'Shipping address is required.' });
         }
-        // Retrieve user _id from the user collection using the provided email
         const user = await User.findOne({ email });
         if (!user) {
             return res.status(404).json({ message: 'User not found.' });
         }
-        // Create separate orders for each order item
         const orderPromises = orderItems.map(async (item) => {
             const totalAmount = item.price * item.quantity;
             
             const order = new Order({
                 user: user._id,
-                orderItems: [item], // Each order contains a single item
+                orderItems: [item], 
                 shippingAddress,
                 totalAmount,    
             });
@@ -49,18 +46,15 @@ router.get('/my-orders', isAuthenticatedUser, async (req, res) => {
     try {
         const { email } = req.query;
 
-        // Validate the email parameter
         if (!email) {
             return res.status(400).json({ message: 'Email is required.' });
         }
 
-        // Retrieve user _id from the user collection using the provided email
         const user = await User.findOne({ email });
         if (!user) {
             return res.status(404).json({ message: 'User not found.' });
         }
 
-        // Find all orders associated with the user
         const orders = await Order.find({ user: user._id });
 
         res.status(200).json({ orders });
